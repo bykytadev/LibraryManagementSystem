@@ -75,4 +75,22 @@ public class GlobalExceptionHandler {
                 .build();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(
+            ResourceNotFoundException exception,
+            WebRequest request) {
+
+        Locale locale = request.getLocale();
+        ErrorCode errorCode = exception.getErrorCode();
+
+        ErrorResponse error = ErrorResponse.builder()
+                .code(errorCode.getCode())
+                .message(errorCode.getMessage(locale))
+                .build();
+
+        return ResponseEntity
+                .status(errorCode.getStatusCode())
+                .body(error);
+    }
 }

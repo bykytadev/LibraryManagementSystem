@@ -1,6 +1,6 @@
 package com.sqc.academy.library.entities;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 import com.sqc.academy.library.entities.enums.BorrowingStatus;
 import jakarta.persistence.Column;
@@ -14,7 +14,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
@@ -22,6 +24,8 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "borrowings")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Borrowing extends EntityBase {
 
@@ -38,14 +42,14 @@ public class Borrowing extends EntityBase {
     @JoinColumn(name = "book_id", nullable = false)
     Book book;
 
-    @Column(name = "borrow_date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    Timestamp borrowDate;
+    @Column(name = "borrow_date", nullable = false)
+    LocalDate borrowDate;
 
     @Column(name = "due_date", nullable = false)
-    Timestamp dueDate; // thời gian dự kiến trả sách
+    LocalDate dueDate; // thời gian dự kiến trả sách
 
-    @Column(name = "return_date")
-    Timestamp returnDate; // thời gian thực tế trả sách
+    @Column(name = "return_date", nullable = true)
+    LocalDate returnDate; // thời gian thực tế trả sách
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20, columnDefinition = "VARCHAR(20) DEFAULT 'BORROWED'")

@@ -1,4 +1,4 @@
--- Trigger to update available_quantity when book quantity changes
+-- Trigger để cập nhật số lượng sách có sẵn khi có sự thay đổi số lượng sách hoặc có người mượn sách
 DELIMITER //
 CREATE TRIGGER trg_book_quantity_update
 AFTER UPDATE ON books

@@ -12,12 +12,12 @@ INSERT INTO books (title, author, general, quantity, available_quantity) VALUES
 ('Pride and Prejudice', 'Jane Austen', 'Romance', 5, 5),
 ('The Catcher in the Rye', 'J.D. Salinger', 'Fiction', 12, 12);
 
-INSERT INTO borrowings (user_id, book_id, borrow_date, due_date, status) VALUES
-((SELECT user_id FROM users WHERE username = 'john_doe'), (SELECT book_id FROM books WHERE title = 'The Great Gatsby'), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY), 'BORROWED'),
-((SELECT user_id FROM users WHERE username = 'jane_smith'), (SELECT book_id FROM books WHERE title = 'To Kill a Mockingbird'), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY), 'BORROWED'),
-((SELECT user_id FROM users WHERE username = 'alice_jones'), (SELECT book_id FROM books WHERE title = '1984'), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY), 'BORROWED'),
-((SELECT user_id FROM users WHERE username = 'bob_brown'), (SELECT book_id FROM books WHERE title = 'Pride and Prejudice'), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY), 'BORROWED'),
-((SELECT user_id FROM users WHERE username = 'charlie_davis'), (SELECT book_id FROM books WHERE title = 'The Catcher in the Rye'), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 14 DAY), 'BORROWED');
+INSERT INTO borrowings (user_id, book_id, borrow_date, due_date, return_date, status) VALUES
+((SELECT user_id FROM users WHERE username = 'john_doe'), (SELECT book_id FROM books WHERE title = 'The Great Gatsby'), CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), NULL, 'BORROWED'),
+((SELECT user_id FROM users WHERE username = 'jane_smith'), (SELECT book_id FROM books WHERE title = 'To Kill a Mockingbird'), CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), NULL, 'BORROWED'),
+((SELECT user_id FROM users WHERE username = 'alice_jones'), (SELECT book_id FROM books WHERE title = '1984'), CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), NULL, 'BORROWED'),
+((SELECT user_id FROM users WHERE username = 'bob_brown'), (SELECT book_id FROM books WHERE title = 'Pride and Prejudice'), CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), NULL, 'BORROWED'),
+((SELECT user_id FROM users WHERE username = 'charlie_davis'), (SELECT book_id FROM books WHERE title = 'The Catcher in the Rye'), CURRENT_DATE, DATE_ADD(CURRENT_DATE, INTERVAL 14 DAY), NULL, 'BORROWED');
 
 INSERT INTO fines (borrowing_id, amount, paid_amount, status) VALUES
 ((SELECT borrowing_id FROM borrowings WHERE user_id = (SELECT user_id FROM users WHERE username = 'john_doe') AND book_id = (SELECT book_id FROM books WHERE title = 'The Great Gatsby')), 5.00, 0, 'UNPAID'),

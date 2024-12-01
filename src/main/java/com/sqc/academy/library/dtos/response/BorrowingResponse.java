@@ -1,7 +1,8 @@
 package com.sqc.academy.library.dtos.response;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.sqc.academy.library.entities.enums.BorrowingStatus;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,8 +16,13 @@ public class BorrowingResponse {
     Long borrowingId;
     String userId;
     Long bookId;
-    Timestamp borrowDate;
-    Timestamp dueDate;
-    Timestamp returnDate;
+    LocalDate borrowDate;
+    LocalDate dueDate;
+    LocalDate returnDate;
     BorrowingStatus status;
+
+    @JsonGetter("returnDate")
+    public String getReturnDate() {
+        return returnDate == null ? "Not Returned" : returnDate.toString();
+    }
 }

@@ -1,7 +1,8 @@
 package com.sqc.academy.library.dtos.request;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sqc.academy.library.entities.enums.BorrowingStatus;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
@@ -17,24 +18,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class BorrowingRequest {
 
     @NotNull(message = "User ID is mandatory")
+    @JsonProperty("user_id")
     String userId;
 
     @NotNull(message = "Book ID is mandatory")
+    @JsonProperty("book_id")
     Long bookId;
 
     @NotNull(message = "Borrow date is mandatory")
     @FutureOrPresent(message = "Borrow date must be in the present or future")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    Timestamp borrowDate;
+    @JsonProperty("borrow_date")
+    LocalDate borrowDate;
 
     @NotNull(message = "Due date is mandatory")
     @FutureOrPresent(message = "Due date must be in the present or future")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    Timestamp dueDate;
+    @JsonProperty("due_date")
+    LocalDate dueDate;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    Timestamp returnDate;
+    @JsonProperty("return_date")
+    LocalDate returnDate;
 
     @NotNull(message = "Status is mandatory")
+    @JsonProperty("status")
     BorrowingStatus status;
 }

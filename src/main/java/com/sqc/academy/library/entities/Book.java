@@ -1,13 +1,18 @@
 package com.sqc.academy.library.entities;
 
+import com.sqc.academy.library.entities.enums.BookStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
@@ -15,6 +20,8 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "books")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Book {
 
@@ -37,4 +44,12 @@ public class Book {
 
     @Column(name = "available_quantity", nullable = false)
     int availableQuantity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", length = 20, columnDefinition = "VARCHAR(20) DEFAULT 'AVAILABLE'")
+    BookStatus status;
+
+    public boolean isBorrowed() {
+        return availableQuantity < quantity;
+    }
 }

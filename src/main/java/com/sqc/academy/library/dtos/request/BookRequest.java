@@ -1,5 +1,6 @@
 package com.sqc.academy.library.dtos.request;
 
+import com.sqc.academy.library.entities.enums.BookStatus;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,4 +33,6 @@ public class BookRequest {
     @NotNull(message = "Available quantity is mandatory")
     @Min(value = 0, message = "Available quantity must be at least 0")
     int availableQuantity;
+
+    BookStatus status;
 }
