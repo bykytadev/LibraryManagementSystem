@@ -1,0 +1,15 @@
+CREATE TABLE borrowings (
+    borrowing_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    book_id BIGINT NOT NULL,
+    borrow_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    due_date TIMESTAMP NOT NULL,
+    return_date TIMESTAMP NULL,
+    status VARCHAR(20) DEFAULT 'BORROWED',
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    in_active BOOLEAN DEFAULT FALSE,
+    is_delete BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
