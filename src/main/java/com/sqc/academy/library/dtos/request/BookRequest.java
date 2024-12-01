@@ -34,5 +34,5 @@ public class BookRequest {
     @Min(value = 0, message = "Available quantity must be at least 0")
     int availableQuantity;
 
-    BookStatus status;
+    BookStatus status; // default value is AVAILABLE
 }

@@ -5,4 +5,6 @@ import com.sqc.academy.library.dtos.response.BorrowingResponse;
 
 public interface BorrowingService {
     BorrowingResponse borrowBook(BorrowingRequest borrowingRequest);
+
+    BorrowingResponse returnBook(Long borrowingId);
 }

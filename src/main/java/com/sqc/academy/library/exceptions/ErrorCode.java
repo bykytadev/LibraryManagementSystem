@@ -14,7 +14,13 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     BOOK_NOT_FOUND(1001, "book.not.found", HttpStatus.NOT_FOUND),
-    BOOK_ALREADY_BORROWED(1002, "book.already.borrowed", HttpStatus.BAD_REQUEST);
+    BOOK_ALREADY_BORROWED(1002, "book.already.borrowed", HttpStatus.BAD_REQUEST),
+    BOOK_ALREADY_RETURNED(1003, "book.already.returned", HttpStatus.BAD_REQUEST),
+
+    BORROWING_NOT_FOUND(2001, "borrowing.not.found", HttpStatus.NOT_FOUND),
+    BORROWING_ALREADY_RETURNED(2002, "borrowing.already.returned", HttpStatus.BAD_REQUEST);
+
+    ;
 
     int code;
     String messageKey;

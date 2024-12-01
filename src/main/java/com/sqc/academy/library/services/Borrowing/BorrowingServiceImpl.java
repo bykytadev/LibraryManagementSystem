@@ -1,5 +1,6 @@
 package com.sqc.academy.library.services.Borrowing;
 
+import java.time.LocalDate;
 import java.util.Locale;
 
 import com.sqc.academy.library.dtos.request.BorrowingRequest;
@@ -45,8 +46,42 @@ public class BorrowingServiceImpl implements BorrowingService {
         borrowing.setStatus(BorrowingStatus.BORROWED);
         borrowing.setReturnDate(null); // Set returnDate to null by default
 
+        // Set borrowDate based on request or default to today
+        if (request.getBorrowDate() != null) {
+            borrowing.setBorrowDate(request.getBorrowDate());
+        } else {
+            borrowing.setBorrowDate(LocalDate.now());
+        }
+
         // 4. Update book quantity
         book.setAvailableQuantity(book.getAvailableQuantity() - 1);
+        bookRepository.save(book);
+
+        // 5. Save borrowing record
+        borrowing = borrowingRepository.save(borrowing);
+
+        // 6. Return response
+        return borrowingMapper.toResponse(borrowing);
+    }
+
+    @Override
+    public BorrowingResponse returnBook(Long borrowingId) {
+        // 1. Find and validate borrowing record
+        Borrowing borrowing = borrowingRepository.findById(borrowingId)
+                .orElseThrow(() -> new AppException(ErrorCode.BORROWING_NOT_FOUND, Locale.getDefault()));
+
+        // 2. Check if book is already returned
+        if (borrowing.getStatus() == BorrowingStatus.RETURNED) {
+            throw new AppException(ErrorCode.BOOK_ALREADY_RETURNED, Locale.getDefault());
+        }
+
+        // 3. Update borrowing record
+        borrowing.setStatus(BorrowingStatus.RETURNED);
+        borrowing.setReturnDate(LocalDate.now());
+
+        // 4. Update book quantity
+        Book book = borrowing.getBook();
+        book.setAvailableQuantity(book.getAvailableQuantity() + 1);
         bookRepository.save(book);
 
         // 5. Save borrowing record
