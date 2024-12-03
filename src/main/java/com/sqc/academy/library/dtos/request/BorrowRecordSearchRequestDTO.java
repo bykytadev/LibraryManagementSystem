@@ -17,11 +17,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BorrowRecordRequestDTO {
+public class BorrowRecordSearchRequestDTO {
 
     String userId;
     Integer bookId;
+    Boolean isReturned;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate borrowDate;
+    LocalDate startDate;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    LocalDate endDate;
 }

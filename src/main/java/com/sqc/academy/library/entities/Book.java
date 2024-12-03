@@ -2,6 +2,8 @@ package com.sqc.academy.library.entities;
 
 import java.util.Set;
 
+import com.sqc.academy.library.exceptions.AppException;
+import com.sqc.academy.library.exceptions.ErrorCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,4 +44,16 @@ public class Book extends EntityBase {
     @ManyToMany
     @JoinTable(name = "book_categories", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     Set<Category> categories;
+
+    public void decrementQuantity() {
+        if (quantity > 0) {
+            quantity--;
+        } else {
+            throw new AppException(ErrorCode.BOOK_QUANTITY_INSUFFICIENT);
+        }
+    }
+
+    public void incrementQuantity() {
+        quantity++;
+    }
 }

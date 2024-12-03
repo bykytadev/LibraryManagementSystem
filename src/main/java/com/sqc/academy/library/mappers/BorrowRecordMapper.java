@@ -11,6 +11,8 @@ public interface BorrowRecordMapper {
 
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "book", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "returnDate", ignore = true)
     BorrowRecord toEntity(BorrowRecordRequestDTO borrowRequest);
 
     BorrowRecordResponseDTO toResponseDTO(BorrowRecord borrowRecord);

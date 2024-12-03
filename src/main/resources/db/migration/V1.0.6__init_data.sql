@@ -1,9 +1,9 @@
 INSERT INTO users (id, name, email, role, created_date, modified_date) VALUES
-    ('550e8400-e29b-41d4-a716-446655440000', 'Nguyễn Văn A', 'nva@example.com', 'user', NOW(), NOW()),
-    ('550e8400-e29b-41d4-a716-446655440001', 'Trần Thị B', 'ttb@example.com', 'user', NOW(), NOW()),
-    ('550e8400-e29b-41d4-a716-446655440002', 'Lê Văn C', 'lvc@example.com', 'admin', NOW(), NOW()),
-    ('550e8400-e29b-41d4-a716-446655440003', 'Phạm Thị D', 'ptd@example.com', 'user', NOW(), NOW()),
-    ('550e8400-e29b-41d4-a716-446655440004', 'Hoàng Văn E', 'hve@example.com', 'user', NOW(), NOW());
+    ('550e8400-e29b-41d4-a716-446655440000', 'Nguyễn Văn A', 'nva@example.com', 'USER', NOW(), NOW()),
+    ('550e8400-e29b-41d4-a716-446655440001', 'Trần Thị B', 'ttb@example.com', 'USER', NOW(), NOW()),
+    ('550e8400-e29b-41d4-a716-446655440002', 'Lê Văn C', 'lvc@example.com', 'ADMIN', NOW(), NOW()),
+    ('550e8400-e29b-41d4-a716-446655440003', 'Phạm Thị D', 'ptd@example.com', 'USER', NOW(), NOW()),
+    ('550e8400-e29b-41d4-a716-446655440004', 'Hoàng Văn E', 'hve@example.com', 'USER', NOW(), NOW());
 
 
 INSERT INTO categories (name, created_date, modified_date) VALUES

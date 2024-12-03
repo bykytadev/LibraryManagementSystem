@@ -1,7 +1,5 @@
 package com.sqc.academy.library.dtos.response;
 
-import java.time.LocalDateTime;
-
 import com.sqc.academy.library.entities.enums.Role;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,6 +15,4 @@ public class UserResponseDTO {
     String name;
     String email;
     Role role;
-    LocalDateTime createdDate;
-    LocalDateTime modifiedDate;
 }
